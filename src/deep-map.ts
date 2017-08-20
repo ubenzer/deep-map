@@ -1,5 +1,5 @@
 import WeakMap = require('es6-weak-map');
-import {isArray, isObject, isFunction, isNil} from 'lodash';
+import { isArray, isPlainObject, isFunction, isNil } from 'lodash';
 
 export interface DeepMapModule {
   <T>(object: any, mapFn: MapFn, options?: Opts): T;
@@ -22,7 +22,7 @@ export const deepMapModule: DeepMapModule = function deepMap(object: any, mapFn:
     throw new Error('mapFn is required');
   } else if (!isFunction(mapFn)) {
     throw new TypeError('mapFn must be a function');
-  } else if (!isObject(options)) {
+  } else if (!isPlainObject(options)) {
     throw new TypeError('options must be an object');
   }
 
@@ -42,7 +42,7 @@ class DeepMap {
 
   public map(value: any, key?: string | number): any {
     return isArray(value) ? this.mapArray(value) :
-      isObject(value) ? this.mapObject(value) :
+      isPlainObject(value) ? this.mapObject(value) :
       this.mapFn.call(this.opts.thisArg, value, key);
   }
 
