@@ -12,7 +12,9 @@
     "test:unit": "istanbul cover -e .ts -x \"*.test.ts\" _mocha -- --opts mocha.opts",
     "test:report": "npm test && open coverage/lcov-report/index.html",
     "test": "npm run test:lint && npm run test:unit",
-    "ci:coveralls": "cat coverage/lcov.info | coveralls"
+    "ci:coveralls": "cat coverage/lcov.info | coveralls",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "engines": {
     "node": ">=4"
@@ -62,6 +64,8 @@
   "dependencies": {
     "es6-weak-map": "^2.0.2",
     "lodash": "^4.17.4",
-    "tslib": "^1.6.0"
-  }
+    "tslib": "^1.6.0",
+    "snyk": "^1.192.3"
+  },
+  "snyk": true
 }
